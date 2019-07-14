@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+.article a {
+    color: #2a3443;
+    text-decoration: none;
+}
+
+header, main {
+    padding: 16px;
+}
+
+header h1 {
+    font-weight: 400;
+}
+
+.article {
+    margin: 0 0 20px 0;
+}
+
+img {
+    max-width: 300px;
+}
