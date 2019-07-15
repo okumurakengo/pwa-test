@@ -70,10 +70,22 @@ async function networkFirst(req) {
 
     try {
         const res = await fetch(req)
+
+        // fetchでPOSTリクエストの場合はそのままのレスポンス
+        if (req.method === "POST") return res;
+
         cache.put(req, res.clone())
-        return res;
+        return res
     } catch (e) {
         const cachedResponse = await cache.match(req)
         return cachedResponse || await caches.match("./fallback.json")
     }
 }
+
+self.addEventListener("push", e => {
+    const { title } = e.data.json();
+    self.registration.showNotification(title, {
+        body: "Notification Test form SW !",
+        icon: "./images/icons/icon-192x192.png",
+    });
+});

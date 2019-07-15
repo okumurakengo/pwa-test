@@ -3,6 +3,8 @@ const main = document.querySelector("main");
 const sourceSelector = document.querySelector("#sourceSelector");
 const defaultSource = "abc-news-au";
 
+const publicVapidKey = "BLGgW2eVUdKoSx2R4k80hCsTSLKPd0YmvHHm2CaW5JfXIlHm92sMHMUGOgBHpaweTRERkCyrT_42cDTmtWCF6zo";
+
 (async () => {
     updateNews();
     await updateSources();
@@ -15,8 +17,23 @@ const defaultSource = "abc-news-au";
 
     if ("serviceWorker" in navigator) {
         try {
-            navigator.serviceWorker.register("sw.js")
+            register = await navigator.serviceWorker.register("sw.js")
             console.log("SW registered")
+
+            const subscription = await register.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
+            });
+            console.log("Push registered");
+
+            fetch("http://localhost:8081", {
+                method: "POST",
+                body: JSON.stringify(subscription),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log("Push Sent");
         } catch (e) {
             console.log("SW faild")
         }
@@ -55,4 +72,23 @@ async function updateNews(source = defaultSource) {
             </div>
         `);
     });
+}
+
+/**
+ * @see https://github.com/web-push-libs/web-push#using-vapid-key-for-applicationserverkey
+ * @param {string} base64String 
+ */
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
 }
