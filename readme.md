@@ -1,5 +1,3 @@
-なんでもいいので簡易サーバーなどでlocalhostで表示する
-
 ```bash
 #nodeで簡易サーバ
 yarn add -D node-static
@@ -18,5 +16,5 @@ push通知用のサーバー起動
 
 ```bash
 yarn
-node push-server.js
+node push-server.js #localhost:8081で起動
 ```
