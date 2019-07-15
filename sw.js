@@ -37,7 +37,7 @@ self.addEventListener("fetch", async e => {
  * キャッシュに存在しない場合はfetchでリクエストした結果を返す
  * 
  * 今回の場合だと、"./",　"./styles.css",　"./app.js" などへのリクエストが発生するとキャッシュから表示
- * それ以外のAjaxやimgなどのリクエストの場合はfetchしてそのままのレスポンスを表示する
+ * それ以外のリクエストの場合はfetchしてそのままのレスポンスを表示する
  *
  * @param {RequestInfo} req
  * @returns {Promise<Response>}
