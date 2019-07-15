@@ -1,6 +1,6 @@
 なんでもいいので簡易サーバーなどでlocalhostで表示する
 
-```bash:bash
+```bash
 #nodeで簡易サーバ
 yarn add -D node-static
 yarn static -p 8080
