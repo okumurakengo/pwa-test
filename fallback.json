@@ -1,0 +1,10 @@
+{
+    "articles": [
+        {
+            "title": "表示できませんでした",
+            "description": "Try loading the page again when you're online.",
+            "url": "",
+            "urlToImage": "images/no-fetch.jpg"
+        }
+    ]
+}
