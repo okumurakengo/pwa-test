@@ -1,5 +1,3 @@
-なんでもいいので簡易サーバーなどでlocalhostで表示する
-
 ```bash
 #nodeで簡易サーバ
 yarn add -D node-static
