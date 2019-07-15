@@ -11,3 +11,12 @@ python3 -m http.server 8080
 ```
 
 http://localhost:8080/
+
+---
+
+push通知用のサーバー起動
+
+```bash
+yarn
+node push-server.js
+```
